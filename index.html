@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troopod — TrooCase Studies</title>
+<meta name="description" content="AI-native website growth partner">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0C;
+    --card:#141416;
+    --card-2:#161618;
+    --border:#242428;
+    --border-soft:#1E1E22;
+    --text:#FFFFFF;
+    --text-body:#D6D4DD;
+    --text-dim:#8A8792;
+    --text-faint:#6E6B78;
+    --purple:#8B5CF6;
+    --purple-hover:#7C4DF0;
+    --green:#4ADE80;
+    --red:#F87171;
+    --sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--text); font-family:var(--sans);
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(10,10,12,.88); backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav-inner{
+    max-width:1400px; margin:0 auto; padding:14px 32px;
+    display:flex; align-items:center; gap:24px;
+  }
+  .nav-logo{ display:flex; align-items:center; gap:8px; text-decoration:none; }
+  .nav-logo img{ height:26px; display:block; }
+  .nav-links{ margin-left:auto; display:flex; align-items:center; gap:12px; }
+  .nav-links a{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:8px 16px; border-radius:9px; border:1px solid var(--border);
+    color:var(--text); text-decoration:none; font-size:14px; font-weight:400;
+    transition:background .18s ease, border-color .18s ease;
+  }
+  .nav-links a:hover{ background:#1A1A1D; border-color:#2E2E33; }
+  .nav-links a.demo{
+    background:var(--purple); border-color:var(--purple); font-weight:500;
+  }
+  .nav-links a.demo:hover{ background:var(--purple-hover); border-color:var(--purple-hover); }
+  .caret{ width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2; }
+
+  /* ---------- HERO ---------- */
+  .hero{ text-align:center; padding:88px 24px 66px; }
+  .hero-logo{ width:min(430px,62vw); display:block; margin:0 auto 16px; }
+  .hero-tag{ font-size:19px; color:var(--text); font-weight:400; }
+  .hero-tag .accent{ color:var(--purple); }
+  .hero-sub{ margin-top:52px; font-size:25px; color:var(--text-dim); font-weight:400; }
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+  .rule{ border:none; border-top:1px solid var(--border-soft); margin:0; }
+
+  .case{ padding:58px 0; }
+  .case-label{
+    color:var(--purple); font-size:12.5px; font-weight:400;
+    letter-spacing:.08em; text-transform:uppercase; margin-bottom:16px;
+  }
+  .case h2{
+    font-size:clamp(24px,2.9vw,34px); line-height:1.2; font-weight:700;
+    letter-spacing:-.02em; margin-bottom:30px; max-width:940px;
+  }
+  .case h2 .p{ color:var(--purple); }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start; }
+  .grid > .col-right{ position:sticky; top:96px; }
+  .col-right .showcase{ max-width:340px; margin:0 auto; }
+
+  .lbl{
+    color:var(--text-dim); font-size:12.5px; letter-spacing:.09em;
+    text-transform:uppercase; font-weight:400; margin:24px 0 9px;
+  }
+  .lbl:first-child{ margin-top:0; }
+  .case p{ color:var(--text-body); font-size:15.5px; line-height:1.72; }
+  .case p + p{ margin-top:16px; }
+  .case a.brand{ color:var(--purple); text-decoration:underline; text-underline-offset:3px; }
+  .outcome-text{ color:var(--purple); font-size:16.5px; line-height:1.6; }
+
+  /* ---------- SHOWCASE ---------- */
+  .showcase-lbl{
+    text-align:center; color:var(--text-dim); font-size:12.5px;
+    letter-spacing:.09em; text-transform:uppercase; margin-bottom:18px;
+  }
+  .showcase{
+    background:transparent; border:1px solid var(--border);
+    border-radius:14px; overflow:hidden; line-height:0;
+  }
+  /* videos are cropped from the bottom so the frame ends above the sticky
+     bottom bar / green banner. tune the second number to trim more or less. */
+  .showcase video{
+    width:100%; display:block; background:transparent;
+    object-fit:cover; object-position:top center;
+  }
+  /* portrait phone clips (9:16 source) trimmed ~18% off the bottom */
+  .col-right .showcase video{ aspect-ratio:9 / 13.1; }
+  /* landscape desktop clips trimmed ~10% off the bottom */
+  .showcase-center.wide .showcase video{ aspect-ratio:1896 / 770; }
+  .showcase-center:not(.wide) .showcase video{ aspect-ratio:16 / 8.4; }
+  .showcase-center{ max-width:620px; margin:36px auto 0; }
+  .showcase-center.wide{ max-width:880px; }
+
+  /* ---------- STATS ---------- */
+  .stats{ display:grid; gap:14px; margin-top:26px; }
+  .stats.c1{ grid-template-columns:minmax(0,300px); }
+  .stats.c2{ grid-template-columns:repeat(2,1fr); }
+  .stats.c3{ grid-template-columns:repeat(3,1fr); }
+  .stat{
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px; padding:20px 16px; text-align:center;
+  }
+  .stat .n{
+    font-size:30px; font-weight:700; color:var(--purple);
+    letter-spacing:-.02em; line-height:1.15;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .stat .arrow{ font-size:17px; font-weight:400; }
+  .stat .arrow.up{ color:var(--green); }
+  .stat .arrow.down{ color:var(--red); }
+  .stat .l{ color:var(--text-dim); font-size:14px; margin-top:4px; }
+
+  .stats-divider{ border:none; border-top:1px solid var(--border-soft); margin:26px 0 0; }
+
+  /* ---------- TESTIMONIAL ---------- */
+  .quote{
+    background:var(--card-2); border:1px solid var(--border);
+    border-radius:14px; padding:24px 24px;
+  }
+  .quote p{
+    font-style:italic; color:var(--text-body); font-size:15px; line-height:1.7;
+  }
+  .quote-foot{
+    display:flex; align-items:center; gap:16px;
+    margin-top:20px; padding-top:18px; border-top:1px solid var(--border);
+  }
+  .avatar{
+    width:42px; height:42px; border-radius:50%; flex:0 0 42px;
+    background:#2A2A30; object-fit:cover;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-dim); font-size:15px; font-weight:500;
+  }
+  .who .nm{ font-size:15px; font-weight:500; color:var(--text); }
+  .who .ro{ font-size:13.5px; color:var(--text-dim); }
+  .brandmark{
+    margin-left:auto; font-size:13px; font-weight:700; letter-spacing:.04em;
+    color:var(--text-dim); border:1px solid var(--border);
+    padding:7px 11px; border-radius:6px; white-space:nowrap;
+  }
+
+  .outcome-row{ display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start; margin-top:36px; }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    text-align:center; padding:82px 0 24px;
+  }
+  .cta h3{
+    font-size:clamp(24px,2.8vw,33px); font-weight:700; letter-spacing:-.02em;
+    line-height:1.22; max-width:720px; margin:0 auto 16px;
+  }
+  .cta h3 .p{ color:var(--purple); }
+  .cta p{
+    color:var(--text-dim); font-size:16px; max-width:600px; margin:0 auto 30px;
+  }
+  .cta .btn{
+    display:inline-block; background:var(--purple); color:#fff;
+    font-family:var(--sans); font-size:16px; font-weight:500;
+    padding:14px 30px; border-radius:11px; text-decoration:none;
+    transition:background .18s ease, transform .18s ease;
+  }
+  .cta .btn:hover{ background:var(--purple-hover); transform:translateY(-1px); }
+  .cta .note{ margin-top:16px; font-size:14px; color:var(--text-faint); }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--border-soft); margin-top:60px;
+    padding:56px 0 32px; background:#0B0B0D;
+  }
+  .f-grid{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr 1.3fr; gap:48px;
+  }
+  .f-logo{ height:26px; margin-bottom:18px; }
+  .f-tag{ color:var(--text-dim); font-size:14.5px; max-width:230px; }
+  .socials{ display:flex; gap:16px; margin-top:22px; }
+  .socials a{ color:var(--text-dim); }
+  .socials svg{ width:22px; height:22px; fill:currentColor; }
+  footer h4{ font-size:16px; font-weight:700; margin-bottom:20px; }
+  footer ul{ list-style:none; }
+  footer ul li{ margin-bottom:13px; }
+  footer ul li a, .f-contact p{
+    color:var(--text-dim); text-decoration:none; font-size:14.5px;
+  }
+  footer ul li a:hover{ color:var(--text); }
+  .f-contact p{ margin-bottom:13px; }
+  .news p{ color:var(--text-dim); font-size:14.5px; margin-bottom:20px; }
+  .news-form{ display:flex; gap:10px; }
+  .news-form input{
+    flex:1; background:#141416; border:1px solid var(--border);
+    border-radius:10px; padding:13px 16px; color:var(--text);
+    font-family:var(--sans); font-size:15px; outline:none;
+  }
+  .news-form input::placeholder{ color:var(--text-faint); }
+  .news-form button{
+    background:var(--purple); border:none; border-radius:10px;
+    width:54px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .news-form button svg{ width:20px; height:20px; fill:#fff; }
+  .f-bottom{
+    display:flex; flex-wrap:wrap; gap:20px; align-items:center;
+    margin-top:56px; padding-top:28px; border-top:1px solid var(--border-soft);
+    color:var(--text-dim); font-size:15px;
+  }
+  .f-bottom .links{ margin-left:auto; display:flex; gap:30px; }
+  .f-bottom a{ color:var(--text-dim); text-decoration:none; }
+  .f-bottom a:hover{ color:var(--text); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:940px){
+    .nav-inner{ padding:12px 18px; gap:12px; }
+    .nav-links{ gap:8px; }
+    .nav-links a{ padding:8px 13px; font-size:14px; }
+    .hero{ padding:70px 20px 56px; }
+    .hero-sub{ margin-top:46px; font-size:25px; }
+    .wrap{ padding:0 20px; }
+    .case{ padding:54px 0; }
+    .grid, .outcome-row{ grid-template-columns:1fr; gap:34px; }
+    .grid > .col-right{ position:static; }
+    .stats.c3, .stats.c2{ grid-template-columns:1fr; }
+    .f-grid{ grid-template-columns:1fr 1fr; gap:38px; }
+    .f-bottom .links{ margin-left:0; gap:18px; }
+  }
+  @media (max-width:560px){
+    .nav-links .hide-sm{ display:none; }
+    .f-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="https://troopod.io"><img src="https://troopod.io/troopod-logo.png?v=2" alt="troopod"></a>
+    <div class="nav-links">
+      <a class="hide-sm" href="https://troopod.io">Solutions
+        <svg class="caret" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <a href="https://troopod.io/case-studies">Case Studies</a>
+      <a class="hide-sm" href="https://troopod.io/blogs">Blogs</a>
+      <a class="demo" href="https://calendly.com/nj-troopod/troopod-demo">Book a Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <img class="hero-logo" src="https://troopod.io/troopod-logo.png?v=2" alt="troopod">
+  <div class="hero-tag">AI-native website <span class="accent">growth partner</span></div>
+  <div class="hero-sub">TrooCase Studies</div>
+</header>
+
+<div class="wrap"><hr class="rule"></div>
+
+<!-- ══════════ CASE 1 — FORMIAL LABS ══════════ -->
+<section class="wrap case">
+  <div class="case-label">TrooCase Study 1</div>
+  <h2>How a fast-growing prescription skincare brand increased revenue <span class="p">by 17% in 30 days</span></h2>
+
+  <div class="lbl">About the Brand</div>
+  <p><a class="brand" href="https://formial.in/products/recurring-customer-2b" target="_blank" rel="noopener">Formial Labs</a> is a doctor-led, personalized prescription skincare brand founded in 2024</p>
+
+  <div class="lbl">Challenge</div>
+  <p>The brand wanted to increase revenue while driving stronger adoption of its 2-month subscription model. The product page was not clearly prioritizing subscription purchases, and users lacked enough trust and clarity to commit confidently</p>
+
+  <div class="lbl">What Troopod Did</div>
+  <p>Troopod with the help of its dev agent redesigned the product page with a subscription-first strategy</p>
+  <p>Key optimizations included:<br>
+    1. Positioning the 2-month subscription model as the primary and recommended option<br>
+    2. Adding trust badges, reviews, and credibility markers<br>
+    3. Introducing customer testimonials with before &amp; after imagery<br>
+    4. Streamlining the form and checkout flow to reduce friction</p>
+  <p>The product page was rebuilt to guide users more clearly toward subscription purchase decisions</p>
+
+  <div class="showcase-center wide">
+    <div class="showcase-lbl">Product Page Showcase</div>
+    <div class="showcase">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="https://troopod.io/videos/case-study-3-showcase.mov" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="lbl" style="margin-top:44px;">Outcome</div>
+  <p class="outcome-text">Significant improvements across key metrics within 30 days</p>
+  <hr class="stats-divider">
+  <div class="stats c3">
+    <div class="stat"><div class="n">20%<span class="arrow down">↓</span></div><div class="l">Bounce Rate</div></div>
+    <div class="stat"><div class="n">10%<span class="arrow up">↑</span></div><div class="l">Conversion Rate</div></div>
+    <div class="stat"><div class="n">17%<span class="arrow up">↑</span></div><div class="l">Revenue Increase</div></div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<!-- ══════════ CASE 2 — NXTFACE ══════════ -->
+<section class="wrap case">
+  <div class="case-label">TrooCase Study 2</div>
+  <h2>How a $50M traditional company launches CRO-ready landing pages <span class="p">in 1 day</span></h2>
+
+  <div class="grid">
+    <div class="col-left">
+      <div class="lbl">About the Brand</div>
+      <p><a class="brand" href="https://nxtface.com/collections/face-serums/products/nxtface-3x-sph-spf-50-pa-30ml?variant=42850839199809" target="_blank" rel="noopener">NXTFACE</a> is a DTC skincare brand launched by Naturals Salon &amp; Spa, a leading salon chain in India</p>
+
+      <div class="lbl">Challenge</div>
+      <p>The brand needed to launch CRO-optimized landing pages quickly to support ongoing marketing campaigns Internal processes and development timelines were slowing down execution</p>
+
+      <div class="lbl">What Troopod Did</div>
+      <p>Troopod combines strategic consulting with its website development agent to build CRO-ready landing pages from scratch within a day</p>
+      <p>The agent intelligently edits and develops UI, UX, content, and features based on real performance data and past CRO learnings ensuring every change is grounded in what has historically driven conversion uplift</p>
+      <p>Each page is structured for clarity, speed, and conversion without compromising site performance</p>
+    </div>
+    <div class="col-right">
+      <div class="showcase-lbl">Landing Page Showcase</div>
+      <div class="showcase">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://troopod.io/videos/case-study-2-showcase.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div class="outcome-row">
+    <div>
+      <div class="lbl" style="margin-top:0;">Outcome</div>
+      <p class="outcome-text">1. Landing pages now launch within 1 day<br>2. Faster campaign execution</p>
+      <div class="stats c1">
+        <div class="stat"><div class="n">1 Day</div><div class="l">Time to Launch</div></div>
+      </div>
+    </div>
+    <div class="quote">
+      <p>"Troopod built our entire website from scratch and transformed our product pages into high-converting sales pages incredibly fast without compromising site speed. Truly professional, proactive, and results-driven"</p>
+      <div class="quote-foot">
+        <div class="avatar">AC</div>
+        <div class="who"><div class="nm">Avantika Chaudhary</div><div class="ro">DTC Head, 100Days</div></div>
+        <div class="brandmark">NXTFACE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<!-- ══════════ CASE 3 — GATACA ══════════ -->
+<section class="wrap case">
+  <div class="case-label">TrooCase Study 3</div>
+  <h2>How a VC-backed brand Gataca increased AOV by 225% <span class="p">through conversion-focused ecommerce execution</span></h2>
+
+  <div class="grid">
+    <div class="col-left">
+      <div class="lbl">About the Brand</div>
+      <p><a class="brand" href="https://www.gataca.in/" target="_blank" rel="noopener">Gataca</a> is a venture-backed DTC wellness and performance supplements brand delivering science-backed formulations designed to enhance energy, endurance, recovery, and long-term health optimization.</p>
+
+      <div class="lbl">Challenge</div>
+      <p>Although traffic was strong, Gataca's ecommerce experience wasn't converting optimally. Average order values were low, and sales growth was limited due to unclear product journeys and under-optimized checkout and upsell flows.</p>
+
+      <div class="lbl">What Troopod Did</div>
+      <p>Troopod activated its Performance Agent and TrooCRO intelligence agent to rebuild Gataca's tech and conversion infrastructure, improve site speed, embed AI-driven cross-sell intelligence with human oversight, and increase AOV through strategic pack-size and bundling optimization within the first 1.5 fold.</p>
+    </div>
+    <div class="col-right">
+      <div class="showcase-lbl">Landing Page Showcase</div>
+      <div class="showcase">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://troopod.io/videos/Gataca.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div class="outcome-row">
+    <div>
+      <div class="lbl" style="margin-top:0;">Outcome</div>
+      <p class="outcome-text">Average order value increased dramatically, and sales grew steadily, reflecting better customer engagement and higher transaction value.</p>
+      <div class="stats c2">
+        <div class="stat"><div class="n">225%<span class="arrow up">↑</span></div><div class="l">AOV Increase</div></div>
+        <div class="stat"><div class="n">20%<span class="arrow up">↑</span></div><div class="l">Total Sales Increase</div></div>
+      </div>
+    </div>
+    <div class="quote">
+      <p>"Working with Troopod has been a highly positive experience. Their structured CRO execution and end-to-end ownership delivered clear improvements in engagement and conversion performance."</p>
+      <div class="quote-foot">
+        <div class="avatar">A</div>
+        <div class="who"><div class="nm">Aditya</div><div class="ro">Founder, Gataca</div></div>
+        <div class="brandmark">GATACA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<!-- ══════════ CASE 4 — NABHISUTRA ══════════ -->
+<section class="wrap case">
+  <div class="case-label">TrooCase Study 4</div>
+  <h2>How Shark Tank brand Nabhisutra accelerated website execution <span class="p">through centralized ownership</span></h2>
+
+  <div class="grid">
+    <div class="col-left">
+      <div class="lbl">About the Brand</div>
+      <p><a class="brand" href="https://nabhisutra.com/" target="_blank" rel="noopener">Nabhisutra</a> is a Shark Tank-featured Ayurvedic wellness brand reviving traditional navel oiling remedies for modern consumers, blending ancient formulations with a digital-first, DTC approach.</p>
+
+      <div class="lbl">Challenge</div>
+      <p>Despite strong post-Shark Tank momentum, Nabhisutra struggled with fragmented website management across multiple vendors, leading to slow updates, inconsistent execution, and limited performance optimization.</p>
+
+      <div class="lbl">What Troopod Did</div>
+      <p>Troopod centralized ongoing website management, handling banner and offer rollouts, Shopify app consultation and setup, and rapid landing page refinements during sale periods. Troopod's development agents ensured faster execution cycles, cleaner implementation, and seamless coordination across updates to keep the site conversion-ready consistently.</p>
+    </div>
+    <div class="col-right">
+      <div class="showcase-lbl">Landing Page Showcase</div>
+      <div class="showcase">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="https://troopod.io/videos/Nabhisutra.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div class="outcome-row">
+    <div>
+      <div class="lbl" style="margin-top:0;">Outcome</div>
+      <p class="outcome-text">Website execution became centralized, faster, and more reliable, enabling smoother updates and better sale-readiness across campaigns.</p>
+      <div class="stats c1">
+        <div class="stat"><div class="n">3X</div><div class="l">Faster Execution</div></div>
+      </div>
+    </div>
+    <div class="quote">
+      <p>"Troopod took complete ownership of Nabhisutra's website from speed and backend stability to smooth updates and ongoing management. Their proactive approach has made the site faster, more reliable, and easier to scale, while letting us focus on the business instead of tech issues."</p>
+      <div class="quote-foot">
+        <div class="avatar">S</div>
+        <div class="who"><div class="nm">Swati</div><div class="ro">Founder, Nabhisutra</div></div>
+        <div class="brandmark">NABHISUTRA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<!-- ══════════ CASE 5 — CONSCIOUS CHEMIST ══════════ -->
+<section class="wrap case">
+  <div class="case-label">TrooCase Study 5</div>
+  <h2>How a VC-backed brand Conscious Chemist streamlined website <span class="p">management through centralized tech and CRO execution</span></h2>
+
+  <div class="lbl">About the Brand</div>
+  <p><a class="brand" href="https://consciouschemist.com/" target="_blank" rel="noopener">Conscious Chemist</a> is a VC-backed, science-driven skincare brand focused on clean, performance-led formulations. The brand blends clinically researched ingredients with transparent positioning to deliver targeted skincare solutions through a strong DTC-first approach.</p>
+
+  <div class="lbl">Challenge</div>
+  <p>As a fast-scaling DTC brand, Conscious Chemist required stronger technical stability and structured experimentation to support high-traffic campaigns. Their BYOB (Build Your Own Bundle) page faced performance bottlenecks, logic inconsistencies, and limited optimization, impacting bundle conversions and user experience.</p>
+
+  <div class="lbl">What Troopod Did</div>
+  <p>Troopod took ownership of the BYOB page end-to-end, rebuilding the bundle architecture to ensure cleaner logic, faster load performance, and seamless product selection. Troopod's development agents optimized the codebase, stabilized dynamic pricing calculations, and removed friction in variant selection and cart syncing. We also refined the UI flow to make bundle creation more intuitive, ensuring clearer value communication and a smoother path to checkout.</p>
+
+  <div class="showcase-center">
+    <div class="showcase-lbl">Landing Page Showcase</div>
+    <div class="showcase">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="https://troopod.io/videos/conscious%20chemist.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="lbl" style="margin-top:44px;">Outcome</div>
+  <p class="outcome-text">The optimized BYOB experience led to a 27% reduction in bounce rate, improved bundle engagement, and created a smoother, higher-intent conversion journey.</p>
+  <hr class="stats-divider">
+  <div class="stats c1">
+    <div class="stat"><div class="n">27%<span class="arrow down">↓</span></div><div class="l">Bounce Rate</div></div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<!-- ══════════ CTA ══════════ -->
+<section class="wrap cta">
+  <h3>Want results like these <span class="p">on your own site?</span></h3>
+  <p>Book 30 minutes and we'll walk through your product page live, show you exactly where the drop-offs are, and tell you what we'd ship in week one.</p>
+  <a class="btn" href="https://calendly.com/nj-troopod/troopod-demo" target="_blank" rel="noopener">Get in touch</a>
+  <div class="note">No deck, no pitch — just the findings.</div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <img class="f-logo" src="https://troopod.io/troopod-logo.png?v=2" alt="troopod">
+        <p class="f-tag">AI-native website growth partner</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/company/troopod" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12H3v-12zM9 8.98h3.8v1.64h.05c.53-1 1.82-2.06 3.75-2.06 4 0 4.74 2.63 4.74 6.05v6.37h-4v-5.65c0-1.35-.03-3.08-1.88-3.08-1.88 0-2.17 1.47-2.17 2.98v5.75H9v-12z"/></svg></a>
+          <a href="https://www.instagram.com/troopod.io" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 3.72a6.12 6.12 0 100 12.24 6.12 6.12 0 000-12.24zm0 10.09a3.97 3.97 0 110-7.94 3.97 3.97 0 010 7.94zm7.79-10.34a1.43 1.43 0 11-2.86 0 1.43 1.43 0 012.86 0z"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="https://troopod.io">Home</a></li>
+          <li><a href="https://troopod.io">Brand Solutions</a></li>
+          <li><a href="https://troopod.io">Agency Solution</a></li>
+          <li><a href="https://troopod.io/case-studies">Case Studies</a></li>
+          <li><a href="https://troopod.io/blogs">Blogs</a></li>
+        </ul>
+      </div>
+
+      <div class="f-contact">
+        <h4>Contact</h4>
+        <p>Headquarters</p>
+        <p>Mumbai, India</p>
+        <p><a href="mailto:nj@troopod.io" style="color:var(--text-dim);text-decoration:none;">nj@troopod.io</a></p>
+      </div>
+
+      <div class="news">
+        <h4>Newsletter</h4>
+        <p>Subscribe to our newsletter for the latest updates on AI CRO.</p>
+        <div class="news-form">
+          <input type="email" placeholder="Your email" aria-label="Your email">
+          <button aria-label="Subscribe"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-bottom">
+      <div>© 2026 Pushstart Media Network Private Limited. All rights reserved.</div>
+      <div class="links">
+        <a href="https://troopod.io">Privacy Policy</a>
+        <a href="https://troopod.io">Terms of Service</a>
+        <a href="https://troopod.io">Cancellation &amp; Refund</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
